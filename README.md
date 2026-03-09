@@ -20,10 +20,25 @@ node ./bin/multi-agent-web-kit.js install web-delivery-loop --target agents,clau
 node ./bin/multi-agent-web-kit.js install web-delivery-loop --target codex
 ```
 
+Direct usage from GitHub right now:
+
+```bash
+npx github:WilliamLop/multi-agent-web-kit list
+npx github:WilliamLop/multi-agent-web-kit install
+```
+
+Run `install` from the root of the target project. With no extra flags it installs everything:
+
+- `.agents/skills/web-delivery-loop`
+- `.claude/skills/web-delivery-loop`
+- Claude command, agent, memory, and hooks
+- `~/.codex/skills/web-delivery-loop`
+
 After publishing to npm:
 
 ```bash
 npx multi-agent-web-kit list
+npx multi-agent-web-kit install
 npx multi-agent-web-kit install web-delivery-loop --target agents,claude --project /path/to/project
 npx multi-agent-web-kit install web-delivery-loop --target codex
 ```
@@ -73,6 +88,7 @@ Copies the shared skill into:
 
 ```bash
 npm test
+npm pack --dry-run
 ```
 
 ## Learning Docs

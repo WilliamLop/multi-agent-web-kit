@@ -3,12 +3,33 @@
   "version": "0.1.0",
   "description": "Shared web delivery skills, Claude integrations, and install tooling for Codex, Claude Code, and .agents-based workflows.",
   "type": "module",
+  "files": [
+    "README.md",
+    "bin",
+    "docs",
+    "lib",
+    "roadmap.md",
+    "skills",
+    "templates",
+    "weekly-review.md"
+  ],
   "bin": {
     "multi-agent-web-kit": "./bin/multi-agent-web-kit.js"
   },
   "scripts": {
     "list": "node ./bin/multi-agent-web-kit.js list",
     "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WilliamLop/multi-agent-web-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WilliamLop/multi-agent-web-kit/issues"
+  },
+  "homepage": "https://github.com/WilliamLop/multi-agent-web-kit#readme",
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "agents",
