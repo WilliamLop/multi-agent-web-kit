@@ -1,18 +1,41 @@
 # Multi-Agent Web Kit
 
-Shared workflow kit for web delivery across Codex, Claude Code, and `.agents`-based setups.
+Kit compartido de trabajo para entregar proyectos web con Codex, Claude Code y entornos basados en `.agents`.
 
-This repo gives you:
+## Comando Unico Recomendado
 
-- a reusable `web-delivery-loop` skill
-- Claude Code command, agent, memory, and hook templates
-- an installer CLI ready to publish and run with `npx`
-- a Playwright smoke-test template
-- your learning roadmap and weekly review docs
+Pega este comando en la raiz de cualquier proyecto:
 
-## Quick Start
+```bash
+npx github:WilliamLop/multi-agent-web-kit install
+```
 
-Local usage before publishing:
+Este flujo ya fue validado contra un proyecto temporal y deja instalado:
+
+- `.agents/skills/web-delivery-loop`
+- `.claude/skills/web-delivery-loop`
+- `.claude/commands/web-delivery.md`
+- `.claude/agents/web-delivery-specialist.md`
+- `.claude/hooks/*`
+- `CLAUDE.web-kit.md`
+- `~/.codex/skills/web-delivery-loop`
+
+Despues de correrlo:
+
+- reinicia Codex si quieres que lea la skill global nueva
+- reinicia Claude Code en ese proyecto para que cargue hooks, comandos y memoria
+
+Este repo te da:
+
+- una skill reusable llamada `web-delivery-loop`
+- plantillas para Claude Code: comando, agente, memoria y hooks
+- un instalador CLI listo para publicarse y ejecutarse con `npx`
+- una plantilla base de prueba con Playwright
+- tu ruta de aprendizaje y tu plantilla de revision semanal
+
+## Inicio Rapido
+
+Uso local antes de publicar:
 
 ```bash
 node ./bin/multi-agent-web-kit.js list
@@ -20,21 +43,21 @@ node ./bin/multi-agent-web-kit.js install web-delivery-loop --target agents,clau
 node ./bin/multi-agent-web-kit.js install web-delivery-loop --target codex
 ```
 
-Direct usage from GitHub right now:
+Uso directo desde GitHub ahora mismo:
 
 ```bash
 npx github:WilliamLop/multi-agent-web-kit list
 npx github:WilliamLop/multi-agent-web-kit install
 ```
 
-Run `install` from the root of the target project. With no extra flags it installs everything:
+Ejecuta `install` desde la raiz del proyecto destino. Sin flags extra instala todo:
 
 - `.agents/skills/web-delivery-loop`
 - `.claude/skills/web-delivery-loop`
-- Claude command, agent, memory, and hooks
+- comando, agente, memoria y hooks para Claude
 - `~/.codex/skills/web-delivery-loop`
 
-After publishing to npm:
+Despues de publicar en npm:
 
 ```bash
 npx multi-agent-web-kit list
@@ -43,138 +66,138 @@ npx multi-agent-web-kit install web-delivery-loop --target agents,claude --proje
 npx multi-agent-web-kit install web-delivery-loop --target codex
 ```
 
-## Publish To npm
+## Publicar En npm
 
-The package name `multi-agent-web-kit` is available.
+El nombre del paquete `multi-agent-web-kit` esta disponible.
 
-### 1. Log in to npm
+### 1. Iniciar sesion en npm
 
-Official npm docs: [npm login](https://docs.npmjs.com/cli/v10/commands/npm-login/)
+Documentacion oficial: [npm login](https://docs.npmjs.com/cli/v10/commands/npm-login/)
 
 ```bash
 npm login
 ```
 
-What happens:
+Que pasa aqui:
 
-- npm opens a web-based login by default
-- after login, credentials are saved in your local `.npmrc`
-- if your account uses 2FA, npm may ask for the extra verification step
+- npm abre un login web por defecto
+- despues del login, las credenciales se guardan en tu `.npmrc` local
+- si tu cuenta usa 2FA, npm puede pedir una verificacion extra
 
-Useful checks:
+Comprobacion util:
 
 ```bash
 npm whoami
 ```
 
-If `npm whoami` prints your username, this machine is ready to publish.
+Si `npm whoami` imprime tu usuario, esta maquina ya puede publicar.
 
-### 2. Publish the package
+### 2. Publicar el paquete
 
-From the repo root:
+Desde la raiz del repo:
 
 ```bash
 npm publish
 ```
 
-This repo already sets `publishConfig.access` to `public`, so you do not need extra flags for a public package.
+Este repo ya tiene `publishConfig.access` en `public`, asi que no necesitas flags extra para publicarlo como paquete publico.
 
-### 3. Verify install from npm
+### 3. Verificar la instalacion desde npm
 
 ```bash
 npx multi-agent-web-kit list
 ```
 
-## Install In A Real Project
+## Instalar En Un Proyecto Real
 
-From the root of the target project:
+Desde la raiz del proyecto destino:
 
 ```bash
 npx github:WilliamLop/multi-agent-web-kit install
 ```
 
-After npm publish, the cleaner version is:
+Despues del publish en npm, la version mas limpia es:
 
 ```bash
 npx multi-agent-web-kit install
 ```
 
-If you want to install only part of the kit:
+Si quieres instalar solo una parte del kit:
 
 ```bash
 npx multi-agent-web-kit install web-delivery-loop --target agents,claude --project /path/to/project
 npx multi-agent-web-kit install web-delivery-loop --target codex
 ```
 
-## Restart After Install
+## Reiniciar Despues De Instalar
 
 ### Codex
 
-If you installed the Codex target globally into `~/.codex/skills`, the safest path is:
+Si instalaste el target de Codex de forma global en `~/.codex/skills`, la forma mas segura es:
 
-1. close the current Codex session
-2. reopen Codex, or start a fresh session in the same workspace
+1. cerrar la sesion actual de Codex
+2. abrir Codex otra vez, o iniciar una sesion nueva en el mismo workspace
 
-This ensures the newly installed skill is loaded.
+Asi te aseguras de que cargue la skill nueva.
 
 ### Claude Code
 
-If you installed `.claude/skills`, commands, hooks, or agents into a project:
+Si instalaste `.claude/skills`, comandos, hooks o agentes en un proyecto:
 
-1. stop the current Claude Code session
-2. start Claude Code again from that project root
+1. detiene la sesion actual de Claude Code
+2. vuelve a abrir Claude Code desde la raiz de ese proyecto
 
-This ensures:
+Asi te aseguras de que:
 
-- `.claude/settings.local.json` hooks reload
-- `.claude/commands/` commands are available
-- `.claude/agents/` agents are available
-- `CLAUDE.md` and `CLAUDE.web-kit.md` are read again
+- `.claude/settings.local.json` recargue los hooks
+- `.claude/commands/` tenga disponibles los comandos
+- `.claude/agents/` tenga disponibles los agentes
+- `CLAUDE.md` y `CLAUDE.web-kit.md` se lean otra vez
 
-## How To Make The Model Use It
+## Como Hacer Que El Modelo Lo Use
 
-Installation makes the workflow available. To get consistent behavior, invoke it explicitly in your task.
+La instalacion deja el flujo disponible. Para que el comportamiento sea consistente, invocalo de forma explicita en tu tarea.
 
-Examples:
+Ejemplo:
 
 ```text
-Use the web-delivery-loop skill to inspect this project, define acceptance criteria, implement the change in phases, and validate the UI with Playwright.
+Usa la skill web-delivery-loop para inspeccionar este proyecto, definir criterios de aceptacion, implementar el cambio por fases y validar la UI con Playwright.
 ```
 
-For Claude Code, after install you can also use the command:
+Para Claude Code, despues de instalarlo tambien puedes usar el comando:
 
 ```text
 /web-delivery improve the contact form and validate it with Playwright
 ```
 
-Best practice:
+Mejor practica:
 
-- mention `web-delivery-loop` by name when the task starts
-- say whether the task touches UI, backend, or both
-- ask for acceptance criteria and phased execution when the request is ambiguous
+- menciona `web-delivery-loop` por nombre cuando empiece la tarea
+- di si la tarea toca UI, backend o ambos
+- pide criterios de aceptacion y ejecucion por fases cuando la solicitud sea ambigua
 
-## Repo Layout
+## Estructura Del Repo
 
-- `skills/web-delivery-loop/`: source-of-truth shared skill
-- `templates/claude/`: Claude Code command, agent, memory, and hook templates
-- `bin/` and `lib/`: installer CLI
-- `docs/publish.md`: GitHub and npm publishing checklist
-- `roadmap.md`: learning roadmap
-- `weekly-review.md`: weekly reflection template
+- `skills/web-delivery-loop/`: skill compartida y fuente de verdad
+- `templates/claude/`: plantillas de Claude Code para comando, agente, memoria y hooks
+- `bin/` y `lib/`: instalador CLI
+- `docs/publish.md`: checklist para GitHub y npm
+- `roadmap.md`: ruta de aprendizaje
+- `weekly-review.md`: plantilla de revision semanal
 
-## What The Installer Does
+## Que Hace El Instalador
 
-### `.agents` target
+### Target `.agents`
 
-Copies the shared skill into:
+Copia la skill compartida en:
 
 ```text
 .agents/skills/web-delivery-loop
 ```
 
-### `claude` target
+### Target `claude`
 
-Copies and wires:
+Copia y deja conectado:
 
 ```text
 .claude/skills/web-delivery-loop
@@ -182,30 +205,30 @@ Copies and wires:
 .claude/agents/web-delivery-specialist.md
 .claude/hooks/*
 CLAUDE.web-kit.md
-CLAUDE.md import
-.claude/settings.local.json hooks
+import en CLAUDE.md
+hooks en .claude/settings.local.json
 ```
 
-### `codex` target
+### Target `codex`
 
-Copies the shared skill into:
+Copia la skill compartida en:
 
 ```text
 ~/.codex/skills/web-delivery-loop
 ```
 
-## Development
+## Desarrollo
 
 ```bash
 npm test
 npm pack --dry-run
 ```
 
-## Learning Docs
+## Documentos De Aprendizaje
 
-This repo also keeps your training material:
+Este repo tambien guarda tu material de entrenamiento:
 
 - `roadmap.md`
 - `weekly-review.md`
 
-Use those to keep your growth structured while the repo itself becomes your reusable distribution kit.
+Usalos para mantener tu crecimiento estructurado mientras conviertes este repo en tu kit reusable de distribucion.
