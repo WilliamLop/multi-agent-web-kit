@@ -1,0 +1,22 @@
+{
+  "name": "multi-agent-web-kit",
+  "version": "0.1.0",
+  "description": "Shared web delivery skills, Claude integrations, and install tooling for Codex, Claude Code, and .agents-based workflows.",
+  "type": "module",
+  "bin": {
+    "multi-agent-web-kit": "./bin/multi-agent-web-kit.js"
+  },
+  "scripts": {
+    "list": "node ./bin/multi-agent-web-kit.js list",
+    "test": "node --test"
+  },
+  "keywords": [
+    "agents",
+    "skills",
+    "claude-code",
+    "codex",
+    "playwright",
+    "web"
+  ],
+  "license": "MIT"
+}
